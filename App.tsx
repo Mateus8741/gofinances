@@ -8,6 +8,7 @@ import { Dashboard } from '@screens/Dashboard';
 
 import { Container } from './stylesApp';
 import theme from '@global/styles/theme';
+import { Register } from '@/screens/Register';
 
 
 
@@ -50,7 +51,7 @@ export default function App() {
   return (
     <Container onLayout={onLayout}>
       <ThemeProvider theme={theme} >
-        <Dashboard />
+        <Register />
       </ThemeProvider>
     </Container>
   );
