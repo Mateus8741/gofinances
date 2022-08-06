@@ -1,5 +1,6 @@
-import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
+import { RFValue } from "react-native-responsive-fontsize";
+import { Modal } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
@@ -38,4 +39,8 @@ export const TransactionsTypes = styled.View`
 
   margin-top: 8px;
   margin-bottom: 8px;
+`;
+
+export const ModalSelect = styled<any>(Modal)`
+
 `;

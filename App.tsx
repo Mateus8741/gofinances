@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import * as SplashScreen from 'expo-splash-screen';
+import theme from '@global/styles/theme';
+
 import { ThemeProvider } from 'styled-components';
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins';
 
-import { Dashboard } from '@screens/Dashboard';
 
 import { Container } from './stylesApp';
-import theme from '@global/styles/theme';
 import { Register } from '@/screens/Register';
 
 
