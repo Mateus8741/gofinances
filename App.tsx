@@ -1,58 +1,41 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from "react";
 
-import * as SplashScreen from 'expo-splash-screen';
-import theme from '@global/styles/theme';
+import theme from "@global/styles/theme";
 
-import { ThemeProvider } from 'styled-components';
-import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins';
+import { NavigationContainer } from "@react-navigation/native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import { ThemeProvider } from "styled-components";
 
-import { Container } from './stylesApp';
-import { Register } from '@/screens/Register';
+import { AppRoutes } from "@/routes/app.routes";
 
+import { Text } from "./stylesApp";
 
-
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
-  
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
     Poppins_700Bold,
-  })
+  });
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        fontsLoaded;
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
-  }, []);
-
-  const onLayout = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-      fontsLoaded;
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
   }
 
   return (
-    <Container onLayout={onLayout}>
-      <ThemeProvider theme={theme} >
-        <Register />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <AppRoutes />
+        </NavigationContainer>
       </ThemeProvider>
-    </Container>
+    </GestureHandlerRootView>
   );
 }

@@ -2,6 +2,8 @@ import styled from "styled-components/native";
 
 import { FlatList } from "react-native";
 
+import { RectButton } from "react-native-gesture-handler";
+
 import { Feather } from "@expo/vector-icons";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import {
@@ -34,9 +36,9 @@ export const UserWraper = styled.View`
   align-items: center;
 `;
 
-export const Icon = styled<any>(Feather).attrs({
-  name: "power",
-})`
+export const LogoutButton = styled<any>(RectButton)``;
+
+export const Icon = styled<any>(Feather)`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${RFValue(24)}px;
 `;

@@ -1,6 +1,9 @@
 import styled from "styled-components/native";
-import { RFValue } from "react-native-responsive-fontsize";
+
+import { TouchableWithoutFeedback } from "react-native";
 import { Modal } from "react-native";
+
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   flex: 1;
@@ -24,7 +27,7 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
-export const InputForm = styled.View`
+export const Form = styled.View`
   flex: 1;
   justify-content: space-between;
   width: 100%;
@@ -41,6 +44,6 @@ export const TransactionsTypes = styled.View`
   margin-bottom: 8px;
 `;
 
-export const ModalSelect = styled<any>(Modal)`
+export const ModalSelect = styled<any>(Modal)``;
 
-`;
+export const WithoutFeedback = styled<any>(TouchableWithoutFeedback)``;
