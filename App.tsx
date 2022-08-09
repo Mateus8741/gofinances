@@ -9,6 +9,9 @@ import { ThemeProvider } from "styled-components";
 
 import { AppRoutes } from "@/routes/app.routes";
 
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 import { Text } from "./stylesApp";
 
 import {
