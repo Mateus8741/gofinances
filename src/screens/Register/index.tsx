@@ -74,8 +74,6 @@ export function Register() {
   }
 
   async function handleRegister(form: FormData) {
-    const dataKey = "@gofinances:transactions";
-
     if (!transactionType) return Alert.alert("Selecione o tipo de transação");
     if (category.key === "category")
       return Alert.alert("Selecione a categoria da transação");
@@ -90,6 +88,7 @@ export function Register() {
     };
 
     try {
+      const dataKey = "@gofinances:transactions";
       const data = await AsyncStorage.getItem(dataKey);
       const currentData = data ? JSON.parse(data) : [];
 
@@ -101,7 +100,7 @@ export function Register() {
       setTransactionType("");
       setCategory({ key: "category", name: "Categoria" });
       reset();
-      navigation.navigate("Listagem", dataFormated);
+      navigation.navigate("Listagem");
     } catch (error) {
       console.log(error);
       Alert.alert("Erro ao cadastrar transação");
