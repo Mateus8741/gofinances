@@ -16,6 +16,7 @@ import {
   Header,
   HighLightCards,
   Icon,
+  LoadingIndicator,
   LogoutButton,
   Photo,
   Title,
@@ -32,10 +33,23 @@ export interface DataListProps extends TransactionCardProps {
   id: string;
 }
 
+interface Props {
+  total: string;
+}
+
+interface CardData {
+  entries: Props;
+  expensive: Props;
+  totalAmount: Props;
+}
+
 export function Dashboard() {
   const navigation = useNavigation();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [data, setData] = useState<DataListProps | any>([]);
+  const [highlightCard, setHighlightCard] = useState<CardData>({} as CardData);
 
   async function loadTransactions() {
     const dataKey = "@gofinances:transactions";
@@ -43,12 +57,23 @@ export function Dashboard() {
     const reponse = await AsyncStorage.getItem(dataKey);
     const transactions = reponse ? JSON.parse(reponse) : [];
 
+    let entriesTotal = 0;
+    let expensiveTotal = 0;
+
     const transactionsFormated: DataListProps[] = transactions.map(
       (transaction: DataListProps) => {
-        const amount = Number(transaction.amount).toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        });
+        if (transaction.type === "positive") {
+          entriesTotal += Number(transaction.amount);
+        } else {
+          expensiveTotal += Number(transaction.amount);
+        }
+
+        const amount = Number(transaction.amount)
+          .toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })
+          .replace("R$", "R$ ");
         const date = Intl.DateTimeFormat("pt-BR", {
           day: "2-digit",
           month: "2-digit",
@@ -66,6 +91,27 @@ export function Dashboard() {
       }
     );
     setData(transactionsFormated);
+    setHighlightCard({
+      entries: {
+        total: entriesTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      expensive: {
+        total: expensiveTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      totalAmount: {
+        total: (entriesTotal - expensiveTotal).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+    });
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -99,22 +145,48 @@ export function Dashboard() {
         </UserWraper>
       </Header>
       <HighLightCards>
-        <HighLightCard
-          type="up"
-          title="Entrada"
-          amount="17.400,00"
-          lastTransaction="Última entrada dia 13 de abril"
-        />
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <HighLightCard
+            type="up"
+            title="Entrada"
+            amount={highlightCard.entries.total}
+            lastTransaction="Última entrada dia 13 de abril"
+          />
+        )}
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <HighLightCard
+            type="down"
+            title="Saida"
+            amount={highlightCard?.expensive?.total}
+            lastTransaction="Última entrada dia 13 de abril"
+          />
+        )}
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <HighLightCard
+            type="total"
+            title="Total"
+            amount={highlightCard?.totalAmount?.total}
+            lastTransaction="Última entrada dia 13 de abril"
+          />
+        )}
       </HighLightCards>
       <Transactions>
         <Title>Listagem</Title>
-        <TransactionsList
-          data={data.sort((a, b) => {
-            return a.date < b.date ? 1 : -1;
-          })}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TransactionCard data={item} />}
-        />
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <TransactionsList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <TransactionCard data={item} />}
+          />
+        )}
       </Transactions>
     </Container>
   );

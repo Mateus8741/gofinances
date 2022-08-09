@@ -12,7 +12,7 @@ import {
 } from "./styles";
 
 export interface TransactionCardProps {
-  type: "up" | "down";
+  type: "positive" | "negative";
   name: string;
   amount: string;
   category: string;
@@ -25,12 +25,13 @@ interface Props {
 
 export function TransactionCard({ data }: Props) {
   const [category] = categories.filter((item) => item.name === data.category);
+
   return (
     <Container>
       <Title>{data.name}</Title>
       {data.amount ? (
         <Amount type={data.type}>
-          {data.type === "up" ? "+" : "-"} {data.amount}
+          {data.type === "positive" ? "+" : "-"} {data.amount}
         </Amount>
       ) : (
         <Amount>R$ 0,00</Amount>

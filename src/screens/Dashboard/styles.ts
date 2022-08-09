@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-import { FlatList } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 
 import { RectButton } from "react-native-gesture-handler";
 
@@ -100,4 +100,9 @@ export const TransactionsList = styled<any>(
 ).attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: { paddingBottom: getBottomSpace() },
+})``;
+
+export const LoadingIndicator = styled<any>(ActivityIndicator).attrs({
+  size: "large",
+  color: "#FF872C",
 })``;

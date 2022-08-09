@@ -2,6 +2,7 @@ import styled, { css } from "styled-components/native";
 
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
+import { Platform } from "react-native";
 
 interface TypeProps {
   type: "up" | "down" | "total";
@@ -10,6 +11,23 @@ interface TypeProps {
 export const Container = styled.View<TypeProps>`
   background-color: ${({ theme, type }) =>
     type === "total" ? theme.colors.secondary : theme.colors.shape};
+
+  ${({ type, theme }) => {
+    switch (type) {
+      case "up":
+        return css`
+          border: 2px solid ${theme.colors.success};
+        `;
+      case "down":
+        return css`
+          border: 2px solid ${theme.colors.attention};
+        `;
+      case "total":
+        return css`
+          border: 2px solid ${theme.colors.shape};
+        `;
+    }
+  }};
 
   width: ${RFValue(300)}px;
   border-radius: 5px;
@@ -42,7 +60,7 @@ export const Icon = styled<any>(Feather)<TypeProps>`
   ${(props) =>
     props.type === "down" &&
     css`
-      color: ${({ theme }) => theme.colors.ateention};
+      color: ${({ theme }) => theme.colors.attention};
     `};
 
   ${(props) =>

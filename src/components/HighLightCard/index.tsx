@@ -33,7 +33,7 @@ export function HighLightCard({ type, title, amount, lastTransaction }: Props) {
 
       <Footer>
         {amount ? 
-          <Amount type={type}>R$ {amount}</Amount>
+          <Amount type={type}>{amount}</Amount>
          : 
           <Amount>R$ 0,00</Amount>
         }
