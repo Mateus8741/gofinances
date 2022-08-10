@@ -1,18 +1,23 @@
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: ["babel-preset-expo"],
     plugins: [
-      ['module-resolver', {
-        root: ['.'],
-        extensions: ['.js', '.jsx'],
-        alias: {
-          '@': './src',
-          '@components': './src/components',
-          '@screens': './src/screens',
-          '@global': './src/global',
-        }
-      }]
-    ]
+      "inline-dotenv",
+      [
+        "module-resolver",
+        {
+          root: ["."],
+          extensions: [".js", ".jsx"],
+          alias: {
+            "@": "./src",
+            "@components": "./src/components",
+            "@screens": "./src/screens",
+            "@global": "./src/global",
+            "@assets": "./src/assets",
+          },
+        },
+      ],
+    ],
   };
 };

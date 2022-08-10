@@ -8,6 +8,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components";
 
 import { AppRoutes } from "@/routes/app.routes";
+import { SignIn } from "@/screens/SignIn";
+import { AuthProvider } from "@/hooks/auth";
 
 import "intl";
 import "intl/locale-data/jsonp/pt-BR";
@@ -37,7 +39,10 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Status />
-          <AppRoutes />
+          {/* <AppRoutes /> */}
+          <AuthProvider>
+            <SignIn />
+          </AuthProvider>
         </NavigationContainer>
       </ThemeProvider>
     </GestureHandlerRootView>
