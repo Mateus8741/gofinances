@@ -106,3 +106,11 @@ export const LoadingIndicator = styled<any>(ActivityIndicator).attrs({
   size: "large",
   color: "#FF872C",
 })``;
+
+export const Warning = styled.Text`
+  font-size: ${RFValue(18)}px;
+  color: ${({ theme }) => theme.colors.text_dark};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  text-align: center;
+  margin-top: 50px;
+`;

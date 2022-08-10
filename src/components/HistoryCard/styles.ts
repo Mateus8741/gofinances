@@ -15,19 +15,30 @@ export const Container = styled.View<CotainerProps>`
 
   padding: 13px 24px;
 
-  border-radius: 5px;
+  border-top-left-radius: 5px;
   border-left-width: 5px;
   border-left-color: ${({ color }) => color};
+
+  border-top-width: 1px;
+  border-top-color: ${({ color }) => color};
+
+  border-bottom-right-radius: 5px;
+  border-bottom-width: 4px;
+  border-bottom-color: ${({ color }) => color};
+
+  border-right-width: 1px;
+  border-right-color: ${({ color }) => color};
 
   margin-bottom: 8px;
 `;
 
 export const Title = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(15)}px;
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const Amount = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(15)}px;
+  color: ${({ theme }) => theme.colors.attention};
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;

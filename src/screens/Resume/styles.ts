@@ -37,3 +37,8 @@ export const Warning = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   text-align: center;
 `;
+
+export const ChartContainer = styled.View`
+  width: 100%;
+  align-items: center;
+`;
