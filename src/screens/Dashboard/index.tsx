@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useFocusEffect } from "@react-navigation/native";
 
-import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "@/hooks/auth";
 
 import {
   Container,
@@ -46,12 +46,12 @@ interface CardData {
 }
 
 export function Dashboard() {
-  const navigation = useNavigation();
-
   const [isLoading, setIsLoading] = useState(true);
 
-  const [data, setData] = useState<DataListProps | any>([]);
+  const [data, setData] = useState<DataListProps[]>([]);
   const [highlightCard, setHighlightCard] = useState<CardData>({} as CardData);
+
+  const { signOut, user } = useAuth();
 
   function getLasttransactionDate(
     collection: DataListProps[],
@@ -68,11 +68,10 @@ export function Dashboard() {
       month: "long",
     });
     return T;
-    console.log(T);
   }
 
   async function loadTransactions() {
-    const dataKey = "@gofinances:transactions";
+    const dataKey = `@gofinances:transactions_user:${user.id}`;
 
     const reponse = await AsyncStorage.getItem(dataKey);
     const transactions = reponse ? JSON.parse(reponse) : [];
@@ -162,10 +161,6 @@ export function Dashboard() {
     setIsLoading(false);
   }
 
-  useEffect(() => {
-    loadTransactions();
-  }, []);
-
   useFocusEffect(
     useCallback(() => {
       loadTransactions();
@@ -177,17 +172,13 @@ export function Dashboard() {
       <Header>
         <UserWraper>
           <UserInfo>
-            <Photo
-              source={{
-                uri: "https://avatars.githubusercontent.com/u/62652109?v=4",
-              }}
-            />
+            <Photo source={{ uri: user.photo }} />
             <User>
               <UserGreeting>Olá,</UserGreeting>
-              <UserName>Mateus</UserName>
+              <UserName>{user.name}</UserName>
             </User>
           </UserInfo>
-          <LogoutButton onPress={() => {}}>
+          <LogoutButton onPress={signOut}>
             <Icon name="power" />
           </LogoutButton>
         </UserWraper>

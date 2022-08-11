@@ -25,6 +25,7 @@ import { categories } from "@/utils/categories";
 import { useFocusEffect } from "@react-navigation/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useAuth } from "@/hooks/auth";
 
 interface TransactionData {
   type: "positive" | "negative";
@@ -52,6 +53,8 @@ export function Resume() {
     []
   );
 
+  const { user } = useAuth();
+
   function handleDateChange(action: "next" | "previous") {
     if (action === "next") {
       setSelectedDate(addMonths(selectedDate, 1));
@@ -63,7 +66,7 @@ export function Resume() {
   async function loadData() {
     setIsLoading(true);
 
-    const dataKey = "@gofinances:transactions";
+    const dataKey = `@gofinances:transactions_user:${user.id}`;
     const response = await AsyncStorage.getItem(dataKey);
     const responseFormated = response ? JSON.parse(response) : [];
 

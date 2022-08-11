@@ -2,19 +2,20 @@ import React from "react";
 
 import theme from "@global/styles/theme";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { Routes } from "@/routes";
+
+import { Text, Status, Container } from "./stylesApp";
+
+import { LoadingIndicator } from "@/screens/Dashboard/styles";
+
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { ThemeProvider } from "styled-components";
 
-import { AppRoutes } from "@/routes/app.routes";
-import { SignIn } from "@/screens/SignIn";
-import { AuthProvider } from "@/hooks/auth";
+import { AuthProvider, useAuth } from "@/hooks/auth";
 
 import "intl";
 import "intl/locale-data/jsonp/pt-BR";
-
-import { Text, Status } from "./stylesApp";
 
 import {
   useFonts,
@@ -30,20 +31,25 @@ export default function App() {
     Poppins_700Bold,
   });
 
-  if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
+  const { storageLoading } = useAuth();
+
+  if (!fontsLoaded || storageLoading) {
+    return (
+      <Container>
+        <Text>
+          <LoadingIndicator />
+        </Text>
+      </Container>
+    );
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Status />
-          {/* <AppRoutes /> */}
-          <AuthProvider>
-            <SignIn />
-          </AuthProvider>
-        </NavigationContainer>
+        <Status />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

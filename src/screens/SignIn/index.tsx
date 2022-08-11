@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 
 import { RFValue } from "react-native-responsive-fontsize";
 
 import { SigInSocialButton } from "@/components/SigInSocialButton";
+
+import { useAuth } from "@/hooks/auth";
+import { LoadingIndicator } from "../Dashboard/styles";
 
 import AppleSVG from "@/assets/apple.svg";
 import GoogleSVG from "@/assets/google.svg";
@@ -17,16 +20,29 @@ import {
   Title,
   TitleWrapper,
 } from "./styles";
-import { useAuth } from "@/hooks/auth";
+import { Platform } from "react-native";
 
 export function SignIn() {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, signInWithApple } = useAuth();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSignInWithGoogle() {
     try {
-      await signInWithGoogle();
+      setIsLoading(true);
+      return await signInWithGoogle();
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
+    }
+  }
+  async function handleSignInWithApple() {
+    try {
+      setIsLoading(true);
+      return await signInWithApple();
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
     }
   }
 
@@ -47,12 +63,19 @@ export function SignIn() {
 
       <Footer>
         <FooterWrapper>
-          <SigInSocialButton
-            title="Entrar com Google"
-            svg={GoogleSVG}
-            onPress={handleSignInWithGoogle}
-          />
-          <SigInSocialButton title="Entrar com Apple" svg={AppleSVG} />
+          {Platform.OS === "android" ? (
+            <SigInSocialButton
+              title={isLoading ? <LoadingIndicator /> : "Entrar com o Google"}
+              svg={GoogleSVG}
+              onPress={handleSignInWithGoogle}
+            />
+          ) : (
+            <SigInSocialButton
+              title={isLoading ? <LoadingIndicator /> : "Entrar com o Apple"}
+              svg={AppleSVG}
+              onPress={handleSignInWithApple}
+            />
+          )}
         </FooterWrapper>
       </Footer>
     </Container>
