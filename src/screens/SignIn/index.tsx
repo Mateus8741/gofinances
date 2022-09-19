@@ -11,6 +11,8 @@ import AppleSVG from "@/assets/apple.svg";
 import GoogleSVG from "@/assets/google.svg";
 import LogoSVG from "@/assets/logo.svg";
 
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+
 import {
   Container,
   Footer,
@@ -20,7 +22,7 @@ import {
   Title,
   TitleWrapper,
 } from "./styles";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 
 export function SignIn() {
   const { signInWithGoogle, signInWithApple } = useAuth();
@@ -47,37 +49,60 @@ export function SignIn() {
   }
 
   return (
-    <Container>
-      <Header>
-        <TitleWrapper>
-          <LogoSVG width={RFValue(120)} height={RFValue(68)} />
-        </TitleWrapper>
-        <Title>
-          Controle suas{`\n`}
-          finanças de forma{`\n`}
-          muito simples
-        </Title>
+    <>
+      {isLoading ? (
+        <SkeletonPlaceholder>
+          <Header>
+            <TitleWrapper>
+              <LogoSVG width={RFValue(120)} height={RFValue(68)} />
+            </TitleWrapper>
+            <Title>
+              Controle suas{`\n`}
+              finanças de forma{`\n`}
+              muito simples
+            </Title>
 
-        <SignInTitle>Faça seu login com uma das contas abaixo</SignInTitle>
-      </Header>
+            <SignInTitle>Faça seu login com uma das contas abaixo</SignInTitle>
+          </Header>
+        </SkeletonPlaceholder>
+      ) : (
+        <Container>
+          <Header>
+            <TitleWrapper>
+              <LogoSVG width={RFValue(120)} height={RFValue(68)} />
+            </TitleWrapper>
+            <Title>
+              Controle suas{`\n`}
+              finanças de forma{`\n`}
+              muito simples
+            </Title>
 
-      <Footer>
-        <FooterWrapper>
-          {Platform.OS === "android" ? (
-            <SigInSocialButton
-              title={isLoading ? <LoadingIndicator /> : "Entrar com o Google"}
-              svg={GoogleSVG}
-              onPress={handleSignInWithGoogle}
-            />
-          ) : (
-            <SigInSocialButton
-              title={isLoading ? <LoadingIndicator /> : "Entrar com o Apple"}
-              svg={AppleSVG}
-              onPress={handleSignInWithApple}
-            />
-          )}
-        </FooterWrapper>
-      </Footer>
-    </Container>
+            <SignInTitle>Faça seu login com uma das contas abaixo</SignInTitle>
+          </Header>
+
+          <Footer>
+            <FooterWrapper>
+              {Platform.OS === "android" ? (
+                <SigInSocialButton
+                  title={
+                    isLoading ? <LoadingIndicator /> : "Entrar com o Google"
+                  }
+                  svg={GoogleSVG}
+                  onPress={handleSignInWithGoogle}
+                />
+              ) : (
+                <SigInSocialButton
+                  title={
+                    isLoading ? <LoadingIndicator /> : "Entrar com o Apple"
+                  }
+                  svg={AppleSVG}
+                  onPress={handleSignInWithApple}
+                />
+              )}
+            </FooterWrapper>
+          </Footer>
+        </Container>
+      )}
+    </>
   );
 }
