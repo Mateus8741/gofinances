@@ -57,12 +57,14 @@ export const MonthSelect = styled.View`
 export const MonthSelectButton = styled<any>(BorderlessButton)``;
 
 export const MonthSelectIcon = styled<any>(Feather)`
+  color: ${({ theme }) => theme.colors.text_dark};
   font-size: ${RFValue(24)}px;
-`;
+  `;
 
 export const Month = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(20)}px;
+  color: ${({ theme }) => theme.colors.text_dark};
 `;
 
 export const LoadingContainer = styled.View`

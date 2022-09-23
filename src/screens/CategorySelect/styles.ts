@@ -49,11 +49,13 @@ export const Category = styled.TouchableOpacity<CategoryProps>`
 export const Icon = styled<any>(Feather)`
   font-size: ${RFValue(20)}px;
   margin-right: 16px;
+  color: ${({ theme }) => theme.colors.text_dark};
 `;
 
 export const Name = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(14)}px;
+  color: ${({ theme }) => theme.colors.text_dark};
 `;
 
 export const Separator = styled.View`

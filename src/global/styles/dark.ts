@@ -11,12 +11,12 @@ export default {
         attention: '#E72F4B',
         attention_light: '#e72f4b80',
         
-        shape: '#FFFFFF',
+        shape: '#121212',
         title: '#363F5F',
         text: '#969CB2',
-        text_dark: '#000000',
+        text_dark: '#FFFFFF',
 
-        background: '#F0F2F5',    
+        background: '#000000',    
     },
 
     fonts: {

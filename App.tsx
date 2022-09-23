@@ -1,6 +1,6 @@
 import React from "react";
 
-import theme from "@global/styles/theme";
+import theme from "@global/styles";
 
 import { Routes } from "@/routes";
 
@@ -13,6 +13,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ThemeProvider } from "styled-components";
 
 import { AuthProvider, useAuth } from "@/hooks/auth";
+
+import { useColorScheme } from "react-native";
 
 import "intl";
 import "intl/locale-data/jsonp/pt-BR";
@@ -33,6 +35,10 @@ export default function App() {
 
   const { storageLoading } = useAuth();
 
+  const colorScheme = useColorScheme();
+
+  const themes = theme[colorScheme] || theme.light;
+
   if (!fontsLoaded || storageLoading) {
     return (
       <Container>
@@ -45,7 +51,7 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themes}>
         <Status />
         <AuthProvider>
           <Routes />
