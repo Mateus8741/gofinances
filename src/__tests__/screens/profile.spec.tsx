@@ -5,5 +5,5 @@ import { Profile } from "@/screens/Profile";
 
 test("test this input if work correctly", () => {
   const { debug } = render(<Profile />);
-  debug()
+  debug();
 });

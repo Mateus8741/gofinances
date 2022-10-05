@@ -1,14 +1,13 @@
 import React from "react";
+import { Button, Text, TextInput, View } from "react-native";
 
-import { Botao, Container, Texto, TextoInput } from "./styles";
-
-export function Profile(): JSX.Element {
+export function Profile(){
   return (
-    <Container>
-      <Texto>Perfil</Texto>
-      <TextoInput placeholder="Nome" autoCorrect={false} />
-      <TextoInput placeholder="Sobrenome" autoCorrect={false} />
-      <Botao title="Salvar" onPress={() => {}} />
-    </Container>
+    <View>
+      <Text>Perfil</Text>
+      <TextInput placeholder="Nome" autoCorrect={false} />
+      <TextInput placeholder="Sobrenome" autoCorrect={false} />
+      <Button title="Salvar" onPress={() => {}} />
+    </View>
   );
 }
