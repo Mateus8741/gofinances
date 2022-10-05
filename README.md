@@ -63,7 +63,7 @@ Technologies that I used to develop this api
 **Clone the project and access the folder**
 
 ```bash
-$ git clone https://github.com/EliasGcf/gofinances.git && cd gofinances
+$ git clone https://github.com/Mateus8741/gofinances.git && cd gofinances
 ```
 
 **Install dependencies**
@@ -121,7 +121,7 @@ $ yarn web start
 # Fork using GitHub official command line
 # If you don't have the GitHub CLI, use the web site to do that.
 
-$ gh repo fork EliasGcf/gofinances
+$ gh repo fork Mateus8741/gofinances
 ```
 
 **Follow the steps below**
