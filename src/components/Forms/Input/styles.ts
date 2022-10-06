@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { TextInput } from "react-native";
 
 interface Props {
   active?: boolean;
 }
 
-export const Container = styled.TextInput<Props>`
+export const Container = styled(TextInput)<Props>`
   width: 100%;
   padding: 18px;
 
