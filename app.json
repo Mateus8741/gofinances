@@ -18,6 +18,11 @@
     "android": {
       "package": "com.gofinances",
       "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f0de11d7-929a-46b9-8d26-cecbdc2e369c"
+      }
     }
   }
 }
