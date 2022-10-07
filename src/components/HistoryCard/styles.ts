@@ -32,9 +32,10 @@ export const Container = styled.View<CotainerProps>`
   margin-bottom: 8px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text<CotainerProps>`
   font-size: ${RFValue(15)}px;
   font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ color }) => color};
 `;
 
 export const Amount = styled.Text`

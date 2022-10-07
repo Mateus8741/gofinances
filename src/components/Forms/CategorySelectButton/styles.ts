@@ -1,4 +1,5 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
+import { useColorScheme } from "react-native";
 
 import { RectButton } from "react-native-gesture-handler";
 
@@ -16,10 +17,16 @@ export const Container = styled<any>(RectButton).attrs({
 
   border-radius: 5px;
   padding: 18px 16px;
+
+  
+  border-color: ${({ theme }) => theme.colors.border};
+  border-width: 1px;
+  
 `;
 
 export const Category = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.text_dark};
   font-size: ${RFValue(14)}px;
 `;
 

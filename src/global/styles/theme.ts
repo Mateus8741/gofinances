@@ -4,6 +4,8 @@ export default {
         
         secondary: '#FF872C',
         secondary_light: 'rgba(255, 135, 44, 0.3)',
+        border: 'transparent',
+
         
         success: '#12A454',
         success_light: '#12a45480',
